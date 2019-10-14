@@ -1,0 +1,39 @@
+body{
+    background-color: #d6c9a5;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+}
+
+.wrapper {
+    width: 80%;
+    margin: 0 auto;
+}
+.container {
+    margin: 0 auto;
+    width: 320px;
+    height: 320px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    background: #f4f4f4;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    border-radius: 5px;
+    
+}
+
+.box{
+    width: 100px;
+    height: 100px;
+    background: #000;
+    border: 1px solid white;
+    color: white;
+    font-size: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
