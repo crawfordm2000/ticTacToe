@@ -1,18 +1,33 @@
 const tiles = document.querySelectorAll('.box');// array divs
 const gameBoard = document.querySelector('.container');//
-let value = document.querySelectorAll('.box p');
+
+let moves = []
 
 //console.log(gameBoard);
 
 tiles.forEach(function(i , y){
+    
+
+    let play = document.createElement('p');
+    
+
     i.addEventListener('click', function(e){
+
         if(y % 2 == 0){
-            i.innerHTML = "<p>X</p>";
-            console.log(value.value);
+            console.log(this)
+            moves[this.id - 1] = 'X'
+            console.log(moves)
+            
+            play.innerText = "X";
+            i.appendChild(play);
         } else {
-            i.innerHTML = "<p>O</p>"
-            console.log(value.value);
+            
+            play.innerText = "O";
+            i.appendChild(play);
         }
+
+        console.log(play.innerText);
+        
     })
     })
 
