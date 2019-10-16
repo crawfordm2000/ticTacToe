@@ -3,6 +3,8 @@ let counter = 0; // used to determine whether an x or o is placed in the div
 let moves = []; // this array captures all the values of the divs to check the win conditions
 const button = document.querySelector('.btn');
 const background = document.querySelector('.container');
+player1Counter = 0;
+player2Counter = 0;
 
 //Helper Functions
 const enableClicks = () => {
@@ -26,9 +28,11 @@ let winner = () => {
     console.log((counter % 2 === 0) ? "Player 2 Wins" : "Player 1 Wins"); 
     resetButton();
     if(counter % 2 === 0){
-        tiles.style.backgroundColor = "red";
+        button.style.backgroundColor = "red";
+        player2Counter += 1;
     } else {
-        tiles.style.backgroundColor = "blue";
+        button.style.backgroundColor = "blue";
+        player1Counter += 1;
     }
 }
 
@@ -72,10 +76,11 @@ const winCombos = [
 
 
 //Checks win conditions
-let winCheck = function(){
+let winCheck = () => {
     if(moves[0] != undefined && moves[0] === moves[1] && moves[0] === moves[2]){
         winner();
         disableClicks();
+        tiles[0,1,2].style.color = 'red';
     } else if (moves[3] != undefined && moves[3] === moves[4] && moves[5] === moves[3]){
         winner();
         disableClicks();
