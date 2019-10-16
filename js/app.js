@@ -1,14 +1,21 @@
-const tiles = document.querySelectorAll('.box');// array divs
-const gameBoard = document.querySelector('.container');//
-const enableEvents = () => tiles.forEach(tiles => tiles.addEventListener('click', onClick));
-const disableEvents = () => tiles.forEach(tiles => tiles.removeEventListener('click', onClick));
+const tiles = document.querySelectorAll('.box');// array of divs 
 let counter = 0; // used to determine whether an x or o is placed in the div
 let moves = []; // this array captures all the values of the divs to check the win conditions
 const button = document.querySelector('.btn');
 const background = document.querySelector('.container');
 
 //Helper Functions
-let startButton = () => button.addEventListener('click', gameStart);
+const enableClicks = () => {
+    tiles.forEach(tiles => tiles.addEventListener('click', onClick));
+    background.style.backgroundColor = "#f4f4f4";
+}
+
+const disableClicks = () => tiles.forEach(tiles => tiles.removeEventListener('click', onClick));
+
+let startButton = () => {
+    button.addEventListener('click', enableClicks);
+    
+}
 
 let resetButton = () => {
     button.innerText = "Reset";
@@ -66,33 +73,35 @@ const winCombos = [
 let winCheck = function(){
     if(moves[0] != undefined && moves[0] === moves[1] && moves[0] === moves[2]){
         winner();
+        disableClicks();
     } else if (moves[3] != undefined && moves[3] === moves[4] && moves[5] === moves[3]){
         winner();
+        disableClicks();
     } else if (moves[6] != undefined && moves[6] === moves[7] && moves[8] === moves[6]){
         winner();
+        disableClicks();
     } else if (moves[0] != undefined && moves[0] === moves[4] && moves[8] === moves[0]){
         winner();
+        disableClicks();
     } else if (moves[2] != undefined && moves[2] === moves[4] && moves[6] === moves[2]){
         winner();
+        disableClicks();        
     } else if (moves[0] != undefined && moves[0] === moves[3] && moves[6] === moves[0]){
         winner();
+        disableClicks();
     } else if (moves[1] != undefined && moves[1] === moves[4] && moves[7] === moves[1]){
         winner();
+        disableClicks();
     } else if (moves[2] != undefined && moves[2] === moves[5] && moves[8] === moves[2]){
         winner();
+        ddisableClicks();
     } else if (counter === 9){
         console.log('draw');
         reset();
     }
 }
 
-let gameStart = function(){
-    background.style.backgroundColor = "#f4f4f4";
-    enableEvents(); 
-     
- }
-
-        
+      
 startButton();
 
 
