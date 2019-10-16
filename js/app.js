@@ -1,13 +1,53 @@
 const tiles = document.querySelectorAll('.box');// array divs
 const gameBoard = document.querySelector('.container');//
+const enableEvents = () => tiles.forEach(tiles => tiles.addEventListener('click', onClick));
+const disableEvents = () => tiles.forEach(tiles => tiles.removeEventListener('click', onClick));
 let counter = 0; // used to determine whether an x or o is placed in the div
 let moves = []; // this array captures all the values of the divs to check the win conditions
-let button = document.querySelector('.btn');
-let background = document.querySelector('.container');
+const button = document.querySelector('.btn');
+const background = document.querySelector('.container');
 
 //Helper Functions
 let startButton = () => button.addEventListener('click', gameStart);
-let winner = () => console.log((counter % 2 === 0) ? "Player 2 Wins" : "Player 1 Wins");
+
+let resetButton = () => {
+    button.innerText = "Reset";
+    button.addEventListener('click', reset);
+}
+
+let winner = () => {
+    console.log((counter % 2 === 0) ? "Player 2 Wins" : "Player 1 Wins"); 
+    resetButton();
+}
+
+const reset = () => { 
+    for(let i = 0; i < moves.length; i++){
+        tiles[i].innerText = "";
+        }
+        counter = 0;
+        button.innerText = "Play";
+        startButton();
+        console.log(moves);
+        moves = [];
+}
+
+
+const onClick = (event) => {
+    if(counter % 2 === 0 && !event.target.innerText){
+        moves[event.target.id] = 'X';
+        event.target.innerText = 'X';
+        counter++;
+        console.log(moves);
+    } else if (!event.target.innerText){
+        moves[event.target.id] = 'O';
+        event.target.innerText = 'O';
+        counter++;
+        console.log(moves);
+    }
+    winCheck(); 
+}
+
+
 
 const winCombos = [
     [0,1,2],
@@ -42,60 +82,18 @@ let winCheck = function(){
         winner();
     } else if (counter === 9){
         console.log('draw');
+        reset();
     }
 }
 
-
-
-// determines whether an X or O is added to the element with the event listener
 let gameStart = function(){
-
-    //changes background color of gameboard when the play button is pressed
     background.style.backgroundColor = "#f4f4f4";
-    // sets text of button to reset
-    button.innerText = "Reset";
+    enableEvents(); 
+     
+ }
 
-
-    //code for the reset button to reset the gameboard after or during play
-    button.addEventListener('click', function(){
-    for(let i = 0; i < moves.length; i++){
-        tiles[i].innerText = "";
-        }
-        moves = [];
-        counter = 0;
-        startButton();
-    })
-
-
-    
-    // to loop through the 9 divs and apply event listeners to them
-    tiles.forEach(function(tile , index){
         
-        // adds eventListeners to each div 
-        tile.addEventListener('click', function(e){
-            // condition determines whether an x or o is added to the div
-            if(counter % 2 == 0 && !tile.innerText){ // code only runs if the innerText = '' (undefined)
-                moves[this.id] = 'X'; // this == the div clicked. '.id' refers to that divs id
-                tile.innerText = 'X' // sets innerText for the div clicked
-                counter++;
-            } else {
-                if(!tile.innerText){
-                    moves[this.id] = "O";
-                    tile.innerText = "O";
-                    counter++; 
-                }
-   
-            }
-            winCheck();
-            console.log(moves); 
-
-        })
-        })
-}
-
 startButton();
-
-
 
 
 
