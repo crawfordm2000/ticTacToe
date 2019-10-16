@@ -5,6 +5,10 @@ let moves = []; // this array captures all the values of the divs to check the w
 let button = document.querySelector('.btn');
 let background = document.querySelector('.container');
 
+//Helper Functions
+let startButton = () => button.addEventListener('click', gameStart);
+let winner = () => console.log((counter % 2 === 0) ? "Player 2 Wins" : "Player 1 Wins");
+
 const winCombos = [
     [0,1,2],
     [3,4,5],
@@ -16,24 +20,26 @@ const winCombos = [
     [2,5,8]
 ]
 
+
+
 //Checks win conditions
 let winCheck = function(){
     if(moves[0] != undefined && moves[0] === moves[1] && moves[0] === moves[2]){
-        console.log('win');
+        winner();
     } else if (moves[3] != undefined && moves[3] === moves[4] && moves[5] === moves[3]){
-        console.log('win');
+        winner();
     } else if (moves[6] != undefined && moves[6] === moves[7] && moves[8] === moves[6]){
-        console.log('win');
+        winner();
     } else if (moves[0] != undefined && moves[0] === moves[4] && moves[8] === moves[0]){
-        console.log('win');
+        winner();
     } else if (moves[2] != undefined && moves[2] === moves[4] && moves[6] === moves[2]){
-        console.log('win');
+        winner();
     } else if (moves[0] != undefined && moves[0] === moves[3] && moves[6] === moves[0]){
-        console.log('win');
+        winner();
     } else if (moves[1] != undefined && moves[1] === moves[4] && moves[7] === moves[1]){
-        console.log('win');
+        winner();
     } else if (moves[2] != undefined && moves[2] === moves[5] && moves[8] === moves[2]){
-        console.log('win');
+        winner();
     } else if (counter === 9){
         console.log('draw');
     }
@@ -53,9 +59,11 @@ let gameStart = function(){
     //code for the reset button to reset the gameboard after or during play
     button.addEventListener('click', function(){
     for(let i = 0; i < moves.length; i++){
-        tiles[i].innerText = null;
+        tiles[i].innerText = "";
         }
         moves = [];
+        counter = 0;
+        startButton();
     })
 
 
@@ -66,17 +74,15 @@ let gameStart = function(){
         // adds eventListeners to each div 
         tile.addEventListener('click', function(e){
             // condition determines whether an x or o is added to the div
-            if(counter % 2 == 0){
-                if(!tile.innerText){ // code only runs if the innerText = '' (undefined)
-                    moves[this.id] = 'X'; // this == the div clicked. '.id' refers to that divs id
-                    tile.innerText = 'X' // sets innerText for the div clicked
-                    counter++;
-                } 
+            if(counter % 2 == 0 && !tile.innerText){ // code only runs if the innerText = '' (undefined)
+                moves[this.id] = 'X'; // this == the div clicked. '.id' refers to that divs id
+                tile.innerText = 'X' // sets innerText for the div clicked
+                counter++;
             } else {
                 if(!tile.innerText){
-                    moves[this.id] = 'O';
-                    tile.innerText = "O"
-                    counter++;
+                    moves[this.id] = "O";
+                    tile.innerText = "O";
+                    counter++; 
                 }
    
             }
@@ -87,8 +93,10 @@ let gameStart = function(){
         })
 }
 
+startButton();
 
-button.addEventListener('click', gameStart);
+
+
 
 
 
