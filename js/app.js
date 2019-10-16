@@ -25,18 +25,22 @@ let resetButton = () => {
 let winner = () => {
     console.log((counter % 2 === 0) ? "Player 2 Wins" : "Player 1 Wins"); 
     resetButton();
+    if(counter % 2 === 0){
+        tiles.style.backgroundColor = "red";
+    } else {
+        tiles.style.backgroundColor = "blue";
+    }
 }
 
 const reset = () => { 
     for(let i = 0; i < moves.length; i++){
-        tiles[i].innerText = "";
+            tiles[i].innerText = "";
         }
-        counter = 0;
-        button.innerText = "Play";
-        startButton();
-        console.log(moves);
-        moves = [];
-}
+            counter = 0;
+            button.innerText = "Play";
+            startButton();
+            moves = [];
+        }
 
 
 const onClick = (event) => {
@@ -44,12 +48,10 @@ const onClick = (event) => {
         moves[event.target.id] = 'X';
         event.target.innerText = 'X';
         counter++;
-        console.log(moves);
     } else if (!event.target.innerText){
         moves[event.target.id] = 'O';
         event.target.innerText = 'O';
         counter++;
-        console.log(moves);
     }
     winCheck(); 
 }
@@ -94,7 +96,7 @@ let winCheck = function(){
         disableClicks();
     } else if (moves[2] != undefined && moves[2] === moves[5] && moves[8] === moves[2]){
         winner();
-        ddisableClicks();
+        disableClicks();
     } else if (counter === 9){
         console.log('draw');
         reset();
