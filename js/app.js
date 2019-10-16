@@ -2,9 +2,14 @@ const tiles = document.querySelectorAll('.box');// array of divs
 let counter = 0; // used to determine whether an x or o is placed in the div
 let moves = []; // this array captures all the values of the divs to check the win conditions
 const button = document.querySelector('.btn');
+const green = "#1ec20c";
+const slider = document.querySelector('.slider');
+slider.addEventListener('click', function(){
+    console.log('I be sliding');
+})
 const background = document.querySelector('.container');
-player1Counter = 0;
-player2Counter = 0;
+let color = (index, value) => tiles[index].style.color = value;
+
 
 //Helper Functions
 const enableClicks = () => {
@@ -16,7 +21,7 @@ const disableClicks = () => tiles.forEach(tiles => tiles.removeEventListener('cl
 
 let startButton = () => {
     button.addEventListener('click', enableClicks);
-    
+    button.innerText = "Play";
 }
 
 let resetButton = () => {
@@ -25,27 +30,30 @@ let resetButton = () => {
 }
 
 let winner = () => {
-    console.log((counter % 2 === 0) ? "Player 2 Wins" : "Player 1 Wins"); 
-    resetButton();
-    if(counter % 2 === 0){
-        button.style.backgroundColor = "red";
-        player2Counter += 1;
-    } else {
-        button.style.backgroundColor = "blue";
-        player1Counter += 1;
+    //console.log((counter % 2 === 0) ? "Player 2 Wins" : "Player 1 Wins"); 
+    if(counter === 9){
+        console.log('draw');
+    } else if(counter != 9 && counter % 2 === 0){
+        console.log('Player 2 Wins');
+    } else if(counter != 9 && counter % 2 !== 0){
+        console.log('Player 1 Wins');
     }
+    disableClicks();
+    resetButton();
 }
 
 const reset = () => { 
-    for(let i = 0; i < moves.length; i++){
-            tiles[i].innerText = "";
-        }
-            counter = 0;
-            button.innerText = "Play";
-            startButton();
-            moves = [];
-        }
-
+    // console.log(tiles);
+    // tiles.forEach(tiles => tiles.innerText = "");
+    // counter = 0;
+    // button.innerText = "Play";
+    // moves = [];
+    // startButton();
+    // console.log(tiles);
+    // console.log(moves);
+    moves = [];
+    location.reload();
+}
 
 const onClick = (event) => {
     if(counter % 2 === 0 && !event.target.innerText){
@@ -79,37 +87,37 @@ const winCombos = [
 let winCheck = () => {
     if(moves[0] != undefined && moves[0] === moves[1] && moves[0] === moves[2]){
         winner();
-        disableClicks();
-        tiles[0,1,2].style.color = 'red';
+        color(0, green); color(1, green); color(2, green);
     } else if (moves[3] != undefined && moves[3] === moves[4] && moves[5] === moves[3]){
         winner();
-        disableClicks();
+        color(3, green); color(4, green); color(5, green);
     } else if (moves[6] != undefined && moves[6] === moves[7] && moves[8] === moves[6]){
         winner();
-        disableClicks();
+        color(6, green); color(7, green); color(8, green);
     } else if (moves[0] != undefined && moves[0] === moves[4] && moves[8] === moves[0]){
         winner();
-        disableClicks();
+        color(0, green); color(4, green); color(8, green);
     } else if (moves[2] != undefined && moves[2] === moves[4] && moves[6] === moves[2]){
-        winner();
-        disableClicks();        
+        winner(); 
+        color(2, green); color(4, green); color(6, green);     
     } else if (moves[0] != undefined && moves[0] === moves[3] && moves[6] === moves[0]){
         winner();
-        disableClicks();
+        color(0, green); color(3, green); color(6, green);
     } else if (moves[1] != undefined && moves[1] === moves[4] && moves[7] === moves[1]){
         winner();
-        disableClicks();
+        color(1, green); color(4, green); color(7, green);
     } else if (moves[2] != undefined && moves[2] === moves[5] && moves[8] === moves[2]){
         winner();
-        disableClicks();
+        color(2, green); color(5, green); color(8, green);
     } else if (counter === 9){
-        console.log('draw');
-        reset();
+        tiles.forEach(tiles => tiles.style.color = "red");
+        winner();
     }
 }
 
       
 startButton();
+
 
 
 
