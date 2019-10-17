@@ -9,6 +9,9 @@ slider.addEventListener('click', function(){
 })
 const background = document.querySelector('.container');
 let color = (index, value) => tiles[index].style.color = value;
+let randomNumber = () => {return Math.floor((Math.random() * 9) + 0)}
+let random;
+
 
 
 //Helper Functions
@@ -55,32 +58,44 @@ const reset = () => {
     location.reload();
 }
 
+// const onClick = (event) => {
+//     if(counter % 2 === 0 && !event.target.innerText){
+//         moves[event.target.id] = 'X';
+//         event.target.innerText = 'X';
+//         counter++;
+//     } else if (!event.target.innerText){
+//         moves[event.target.id] = 'O';
+//         event.target.innerText = 'O';
+//         counter++;
+//     }
+//     winCheck(); 
+// }
+
+
 const onClick = (event) => {
     if(counter % 2 === 0 && !event.target.innerText){
         moves[event.target.id] = 'X';
         event.target.innerText = 'X';
         counter++;
-    } else if (!event.target.innerText){
-        moves[event.target.id] = 'O';
-        event.target.innerText = 'O';
-        counter++;
+        randomChoice();
     }
     winCheck(); 
 }
+    
 
 
 
-const winCombos = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,4,8],
-    [2,4,6],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8]
-]
 
+const randomChoice = () => {
+    var x = randomNumber();
+    if(moves[x] === undefined){
+        tiles[x].innerText = 'O';
+        moves[x] = 'O';
+        counter++;
+    } else if(moves[x] !== undefined && counter <= 8){
+        randomChoice();   
+    }
+}
 
 
 //Checks win conditions

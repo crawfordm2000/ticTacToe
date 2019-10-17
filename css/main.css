@@ -96,6 +96,12 @@ p {
 
 
 
+
+
+
+
+
+
 /* The switch - the box around the slider */
 .switch {
     position: relative;
@@ -111,6 +117,7 @@ p {
     height: 0;
   }
   
+
   /* The slider */
   .slider {
     position: absolute;
