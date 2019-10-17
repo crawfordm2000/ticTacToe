@@ -74,7 +74,6 @@ const onClick = (event) => {
 
 
 let winner = () => {
-    //console.log((counter % 2 === 0) ? "Player 2 Wins" : "Player 1 Wins"); 
     if(counter === 9){
         console.log('draw');
     } else if(counter != 9 && counter % 2 === 0){
