@@ -17,7 +17,7 @@ let random;
 //Helper Functions
 const enableClicks = () => {
     tiles.forEach(tiles => tiles.addEventListener('click', onClick));
-    background.style.backgroundColor = "#f4f4f4";
+    background.style.backgroundColor = "#5c5c5c";
 }
 
 const disableClicks = () => {
@@ -61,18 +61,18 @@ const reset = () => {
 }
 
 const randomChoice = () => {
+    winCheck();
     var x = randomNumber();
     setTimeout(() => {
-        if(moves[x] === undefined){
+        if(moves[x] === undefined && winCheck() === false){
             tiles[x].innerText = 'O';
             moves[x] = 'O';
-            counter++;
             winCheck();
-        } else if(moves[x] !== undefined && counter <= 8){
+            counter++;
+        } else if(moves[x] !== undefined && counter <= 8 && winCheck() === false){
             randomChoice();   
         }
-    }, 600);  
-     
+    }, 400);    
 }
 
 
@@ -97,9 +97,9 @@ const onClick = (event) => {
         moves[event.target.id] = 'X';
         event.target.innerText = 'X';
         counter++;
+        winCheck(); 
         randomChoice();
-    }
-    winCheck(); 
+    } 
 }
     
 
@@ -132,6 +132,8 @@ let winCheck = () => {
     } else if (counter === 9){
         tiles.forEach(tiles => tiles.style.color = "grey");
         winner();
+    } else {
+        return false;
     }
 }
 
