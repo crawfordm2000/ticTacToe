@@ -10,34 +10,14 @@ const background = document.querySelector('.container');
 let color = (index, value) => tiles[index].style.color = value;
 let randomNumber = () => {return Math.floor((Math.random() * 9) + 0)}
 
-// slider.addEventListener('click', function(){
-//     if(sliderTurn == true){
-//         sliderTurn = false;
-//     } else if (sliderTurn === false){
-//         sliderTurn = true;
-//     }
-    
-// })
-
 
 //Helper Functions
-
-const human = (event) => {
-    if(counter % 2 === 0 && !event.target.innerText){
-        moves[event.target.id] = 'X';
-        event.target.innerText = 'X';
-        counter++;
-    } else if (!event.target.innerText){
-        moves[event.target.id] = 'O';
-        event.target.innerText = 'O';
-        counter++;
+let winColor = (box1, box2, box3) => {
+    if(moves[box1] == "X"){
+        color(box1, green); color(box2, green); color(box3, green);
+    } else if (moves[box1] == "O"){
+        color(box1, red); color(box2, red); color(box3, red);
     }
-    winCheck(); 
-    }
-
-const enableHuman = () => {
-    tiles.forEach(tiles => tiles.addEventListener('click', human));
-    background.style.backgroundColor = "#5c5c5c";
 }
 
 const enableClicks = () => {
@@ -50,22 +30,8 @@ const disableClicks = () => {
     background.style.backgroundColor = "#3d3d3d";
 
 }
-
-let startButton = () => {
-    button.addEventListener('click', enableClicks)}
+let startButton = () => {button.addEventListener('click', enableClicks)}
     
-//     {
-//         button.innerText = "Play";
-//         if(slider === true){
-//             enableClicks();
-//         } else {
-//             enableHuman();
-//         }
-
-//     });
-    
-// }
-
 let resetButton = () => {
     button.innerText = "Reset";
     button.addEventListener('click', reset);
@@ -79,7 +45,6 @@ const reset = () => {
     moves = [];
     tiles.forEach(tiles => tiles.style.color = "#f4f4f4");
     startButton();
-    // location.reload();
 }
 
 const randomChoice = () => {
@@ -108,7 +73,6 @@ const onClick = (event) => {
 }
 
 
-
 let winner = () => {
     //console.log((counter % 2 === 0) ? "Player 2 Wins" : "Player 1 Wins"); 
     if(counter === 9){
@@ -126,80 +90,39 @@ let winner = () => {
 //Checks win conditions
 let winCheck = () => {
     if(moves[0] != undefined && moves[0] === moves[1] && moves[0] === moves[2]){
-        winner();
-        if(moves[0] == "X"){
-            color(0, green); color(1, green); color(2, green);
-            console.log('hey');
-        }else if(moves[0] == "O"){
-            color(0, red); color(1, red); color(2, red);
-        }  
+        winner(); 
+        winColor(0,1,2);
     } else if (moves[3] != undefined && moves[3] === moves[4] && moves[5] === moves[3]){
-        winner();
-        if(moves[3] == "X"){
-            color(3, green); color(4, green); color(5, green);
-            console.log('hey');
-        }else if(moves[3] == "O"){
-            color(3, red); color(4, red); color(5, red);
-        } 
+        winner(); 
+        winColor(3,4,5);
     } else if (moves[6] != undefined && moves[6] === moves[7] && moves[8] === moves[6]){
-        winner();
-        if(moves[6] == "X"){
-            color(6, green); color(7, green); color(8, green);
-            console.log('hey');
-        }else if(moves[6] == "O"){
-            color(6, red); color(7, red); color(8, red);
-        } 
+        winner(); 
+        winColor(6,7,8);
     } else if (moves[0] != undefined && moves[0] === moves[4] && moves[8] === moves[0]){
         winner();
-        if(moves[0] == "X"){
-            color(0, green); color(4, green); color(8, green);
-            console.log('hey');
-        }else if(moves[0] == "O"){
-            color(0, red); color(4, red); color(8, red);
-        } 
+        winColor(0,4,8);
     } else if (moves[2] != undefined && moves[2] === moves[4] && moves[6] === moves[2]){
-        winner(); 
-        if(moves[2] == "X"){
-            color(2, green); color(4, green); color(6, green);
-            console.log('hey');
-        }else if(moves[2] == "O"){
-            color(2, red); color(4, red); color(6, red);
-        }     
+        winner();  
+        winColor(2,4,6);   
     } else if (moves[0] != undefined && moves[0] === moves[3] && moves[6] === moves[0]){
-        winner();
-        if(moves[0] = "X"){
-            color(0, green); color(3, green); color(6, green);
-            console.log('hey');
-        }else if(moves[0] == "O"){
-            color(0, red); color(3, red); color(6, red);
-        } 
+        winner(); 
+        winColor(0,3,6);
     } else if (moves[1] != undefined && moves[1] === moves[4] && moves[7] === moves[1]){
-        winner();
-        if(moves[1] == "X"){
-            color(1, green); color(4, green); color(7, green);
-            console.log('hey');
-        }else if(moves[1] == "O"){
-            color(1, red); color(4, red); color(7, red);
-        } 
+        winner(); 
+        winColor(1,4,7);
     } else if (moves[2] != undefined && moves[2] === moves[5] && moves[8] === moves[2]){
-        winner();
-        if(moves[2] == "X"){
-            color(2, green); color(5, green); color(8, green);
-            console.log('hey');
-        }else if(moves[2] == "O"){
-            color(2, red); color(5, red); color(8, red);
-        } 
+        winner(); 
+        winColor(2,5,8);
     } else if (counter === 9){
         tiles.forEach(tiles => tiles.style.color = "grey");
         winner();
     } else {
         return false;
     }
+
 }
 
-
-
-      
+     
 startButton();
 
 
@@ -221,4 +144,10 @@ startButton();
 //     counter++;
 // }
 // winCheck(); 
+// }
+
+
+// const enableHuman = () => {
+//     tiles.forEach(tiles => tiles.addEventListener('click', human));
+//     background.style.backgroundColor = "#5c5c5c";
 // }
