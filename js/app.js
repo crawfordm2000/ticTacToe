@@ -20,7 +20,11 @@ const enableClicks = () => {
     background.style.backgroundColor = "#f4f4f4";
 }
 
-const disableClicks = () => tiles.forEach(tiles => tiles.removeEventListener('click', onClick));
+const disableClicks = () => {
+    tiles.forEach(tiles => tiles.removeEventListener('click', onClick));
+    background.style.backgroundColor = "#3d3d3d";
+
+}
 
 let startButton = () => {
     button.addEventListener('click', enableClicks);
@@ -46,17 +50,33 @@ let winner = () => {
 }
 
 const reset = () => { 
-    // console.log(tiles);
-    // tiles.forEach(tiles => tiles.innerText = "");
-    // counter = 0;
-    // button.innerText = "Play";
-    // moves = [];
-    // startButton();
-    // console.log(tiles);
-    // console.log(moves);
+    console.log(tiles);
+    tiles.forEach(tiles => tiles.innerText = "");
+    counter = 0;
+    button.innerText = "Play";
     moves = [];
-    location.reload();
+    tiles.forEach(tiles => tiles.style.color = "#f4f4f4");
+    startButton();
+    // location.reload();
 }
+
+const randomChoice = () => {
+    var x = randomNumber();
+    setTimeout(() => {
+        if(moves[x] === undefined){
+            tiles[x].innerText = 'O';
+            moves[x] = 'O';
+            counter++;
+            winCheck();
+        } else if(moves[x] !== undefined && counter <= 8){
+            randomChoice();   
+        }
+    }, 600);  
+     
+}
+
+
+
 
 // const onClick = (event) => {
 //     if(counter % 2 === 0 && !event.target.innerText){
@@ -82,21 +102,6 @@ const onClick = (event) => {
     winCheck(); 
 }
     
-
-
-
-
-const randomChoice = () => {
-    var x = randomNumber();
-    if(moves[x] === undefined){
-        tiles[x].innerText = 'O';
-        moves[x] = 'O';
-        counter++;
-    } else if(moves[x] !== undefined && counter <= 8){
-        randomChoice();   
-    }
-}
-
 
 //Checks win conditions
 let winCheck = () => {
@@ -125,7 +130,7 @@ let winCheck = () => {
         winner();
         color(2, green); color(5, green); color(8, green);
     } else if (counter === 9){
-        tiles.forEach(tiles => tiles.style.color = "red");
+        tiles.forEach(tiles => tiles.style.color = "grey");
         winner();
     }
 }
