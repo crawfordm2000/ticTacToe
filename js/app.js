@@ -11,7 +11,7 @@ const background = document.querySelector('.container');
 
 
 
-/********************* Helper Functions *********************/
+/********************* Functions *********************/
 
 //sets the font color of a specific div
 let color = (index, value) => tiles[index].style.color = value;
