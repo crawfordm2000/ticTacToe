@@ -8,11 +8,16 @@ const green = "#1ec20c";
 const red = "#d41e1e";
 const slider = document.querySelector('.slider');
 const background = document.querySelector('.container');
-let color = (index, value) => tiles[index].style.color = value;
-let randomNumber = () => {return Math.floor((Math.random() * 9) + 0)}
+
 
 
 /********************* Helper Functions *********************/
+
+//sets the font color of a specific div
+let color = (index, value) => tiles[index].style.color = value;
+
+//gets a random number between zero and eight. 
+let randomNumber = () => {return Math.floor((Math.random() * 9) + 0)}
 
 
 //Sets Win or Lose Color
@@ -59,7 +64,6 @@ const reset = () => {
     startButton();
 }
 
-
 // when called, a random number between zero and eight is set to 'x'. If tile[x] is undefined, add an 'O', else pick another number
 // and try again.
 const randomChoice = () => {
@@ -100,34 +104,26 @@ let winner = () => {
     disableClicks();
     resetButton();
 }
-    
+  
 
 //Checks win conditions and disables the game board by calling winner, then calls the color function
 let winCheck = () => {
     if(moves[0] != undefined && moves[0] === moves[1] && moves[0] === moves[2]){
-        winner(); 
-        winColor(0,1,2);
+        winner(); winColor(0,1,2);
     } else if (moves[3] != undefined && moves[3] === moves[4] && moves[5] === moves[3]){
-        winner(); 
-        winColor(3,4,5);
+        winner(); winColor(3,4,5);
     } else if (moves[6] != undefined && moves[6] === moves[7] && moves[8] === moves[6]){
-        winner(); 
-        winColor(6,7,8);
+        winner(); winColor(6,7,8);
     } else if (moves[0] != undefined && moves[0] === moves[4] && moves[8] === moves[0]){
-        winner();
-        winColor(0,4,8);
+        winner(); winColor(0,4,8);
     } else if (moves[2] != undefined && moves[2] === moves[4] && moves[6] === moves[2]){
-        winner();  
-        winColor(2,4,6);   
+        winner(); winColor(2,4,6);   
     } else if (moves[0] != undefined && moves[0] === moves[3] && moves[6] === moves[0]){
-        winner(); 
-        winColor(0,3,6);
+        winner(); winColor(0,3,6);
     } else if (moves[1] != undefined && moves[1] === moves[4] && moves[7] === moves[1]){
-        winner(); 
-        winColor(1,4,7);
+        winner(); winColor(1,4,7);
     } else if (moves[2] != undefined && moves[2] === moves[5] && moves[8] === moves[2]){
-        winner(); 
-        winColor(2,5,8);
+        winner(); winColor(2,5,8);
     } else if (counter === 9){
         tiles.forEach(tiles => tiles.style.color = "grey");
         winner();
@@ -139,6 +135,10 @@ let winCheck = () => {
 
 // after clicking the start button, a game will begin.    
 startButton();
+
+
+
+
 
 
 
