@@ -11,7 +11,7 @@ const background = document.querySelector('.container');
 
 
 
-/********************* Functions *********************/
+/********************* FUNCTIONS *********************/
 
 //sets the font color of a specific div
 let color = (index, value) => tiles[index].style.color = value;
@@ -143,26 +143,3 @@ startButton();
 
 
 
-
-
-
-// to be used to add further functionality in the future
-
-// const human = (event) => {
-// if(counter % 2 === 0 && !event.target.innerText){
-//     moves[event.target.id] = 'X';
-//     event.target.innerText = 'X';
-//     counter++;
-// } else if (!event.target.innerText){
-//     moves[event.target.id] = 'O';
-//     event.target.innerText = 'O';
-//     counter++;
-// }
-// winCheck(); 
-// }
-
-
-// const enableHuman = () => {
-//     tiles.forEach(tiles => tiles.addEventListener('click', human));
-//     background.style.backgroundColor = "#5c5c5c";
-// }
