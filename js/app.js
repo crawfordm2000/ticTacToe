@@ -1,8 +1,8 @@
 /******************* GLOBAL VARIABLES ***********************/
 
-const tiles = document.querySelectorAll('.box');// array of divs in my html 
-let counter = 0; // used to determine whether an x or o is placed in the div
-let moves = []; // this array captures all the values of the divs and allows me to check the win conditions
+const tiles = document.querySelectorAll('.box');//The array of divs in my html. 
+let counter = 0; // used to determine whether an x or o is placed in the div.
+let moves = []; // this array captures all the values of the divs and allows me to check the win conditions.
 const button = document.querySelector('.btn');
 const green = "#1ec20c";
 const red = "#d41e1e";
@@ -10,14 +10,14 @@ const background = document.querySelector('.container');
 
 /********************* FUNCTIONS *********************/
 
-//sets the font color of a specific div
+//Sets the font color of a specific div.
 let color = (index, value) => tiles[index].style.color = value;
 
 //gets a random number between zero and eight. 
 let randomNumber = () => {return Math.floor((Math.random() * 9) + 0)}
 
 
-//Sets Win or Lose Color
+//Sets Win or Lose Color.
 let winColor = (box1, box2, box3) => {
     if(moves[box1] == "X"){
         color(box1, green); color(box2, green); color(box3, green);
@@ -95,6 +95,7 @@ const onClick = (event) => {
 //This is the condition that must be met for a win to occur. 
 let winCond = (box1, box2, box3) => {
     if (moves[box1] != undefined && moves[box1] === moves[box2] && moves[box1] === moves[box3]){
+        resetButton();
         return true;
     } else{
         return false;
@@ -128,6 +129,7 @@ let winCheck = () => {
 }
    
 startButton();
+
 
 
 
