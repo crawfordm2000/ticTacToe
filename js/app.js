@@ -8,7 +8,7 @@ const green = "#1ec20c";
 const red = "#d41e1e";
 const background = document.querySelector('.container');
 
-/********************* FUNCTIONS *********************/
+/********************* FUNCTIONS *****************************/
 
 //Sets the font color of a specific div.
 let color = (index, value) => tiles[index].style.color = value;
@@ -21,8 +21,6 @@ let winColor = (box1, box2, box3) => {
     } else if (moves[box1] == "O"){
         color(box1, red); color(box2, red); color(box3, red);
     }
-    disableClicks();
-    resetButton();
 }
 // enables the player to make a game decision. 
 const enableClicks = () => {
@@ -35,8 +33,8 @@ const disableClicks = () => {
     background.style.backgroundColor = "#3d3d3d";
 }
 // allows the player to start the first game
-let startButton = () => {button.addEventListener('click', enableClicks)}
-// activated after a complete game
+let startButton = () => button.addEventListener('click', enableClicks);
+// activated when a win condition is met
 let resetButton = () => {
     button.innerText = "Reset";
     button.addEventListener('click', function(){
@@ -78,9 +76,8 @@ const onClick = (event) => {
 let winCond = (box1, box2, box3) => {
     if (moves[box1] != undefined && moves[box1] === moves[box2] && moves[box1] === moves[box3]){
         resetButton();
+        disableClicks();
         return true;
-    } else{
-        return false;
     }
 }
 //Checks win conditions and disables the game board by calling winner, then calls the color function
