@@ -75,8 +75,8 @@ const onClick = (event) => {
 //This is the condition that must be met for a win to occur. 
 let winCond = (box1, box2, box3) => {
     if (moves[box1] != undefined && moves[box1] === moves[box2] && moves[box1] === moves[box3]){
-        resetButton();
         disableClicks();
+        resetButton();
         return true;
     }
 }
