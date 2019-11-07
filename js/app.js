@@ -99,7 +99,9 @@ let winCheck = () => {
     } else if (winCond(2,5,8) === true){
          winColor(2,5,8);
     } else if (counter === 9){
-        tiles.forEach(tiles => tiles.style.color = "grey");   
+        tiles.forEach(tiles => tiles.style.color = "grey");  
+        disableClicks();
+        resetButton(); 
     } else {
         return false;
     }
